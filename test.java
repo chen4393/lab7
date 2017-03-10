@@ -64,10 +64,13 @@ public class test {
         System.out.println();
 
         System.out.println(Node.toString(header.getNext()));
+        //Node<Integer> copy = header;
         Node<Integer> revList = Node.reverse(header.getNext());
         System.out.println("Reverse: " + Node.toString(revList));
+        System.out.println("Original: " + Node.toString(header.getNext()));
 
         Node<Integer> shufList = Node.shuffle(revList);
         System.out.println("Shuffle: " + Node.toString(shufList));
+        System.out.println("Original: " + Node.toString(header.getNext()));
     }
 }

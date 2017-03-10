@@ -90,6 +90,7 @@ public class Node<T> {
     }
 
     public static <T> Node<T> reverse(Node<T> list) {
+        /*
         Node prev = null;
         Node current = list;
         Node next = null;
@@ -101,9 +102,34 @@ public class Node<T> {
         }
         list = prev;
         return list;
+        */
+        Node node = null;
+        Node oldNode = null;
+        while (list != null) {
+            node = new Node(list.getData());
+            node.setNext(oldNode);
+            oldNode = node;
+            list = list.getNext();
+        }
+        return node;
     }
 
     public static <T> Node<T> shuffle(Node<T> list) {
+        Node<T> copyList = copy(list);
+        copyList = shuffleInPlace(copyList);
+        return copyList;
+    }
+
+    public static <T> Node<T> copy(Node<T> list) {
+        Node<T> head = new Node(-1);
+        while (list != null) {
+            add(head, (T)list.getData());
+            list = list.getNext();
+        }
+        return head.getNext();
+    }
+
+    public static <T> Node<T> shuffleInPlace(Node<T> list) {
         int n = 0;  // size
         Node<T> trailer = list;
         while (trailer != null) {
@@ -115,6 +141,7 @@ public class Node<T> {
         for (int i = 0; i < n; i++) {
             int change = i + random.nextInt(n - i);
             swap(list, i, change);
+            System.out.println("swap " + i + " and " + change);
         }
         return list;
     }
