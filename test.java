@@ -57,9 +57,17 @@ public class test {
         Node.add(header2, 2);
         Node.add(header2, 3);
         // header2 --> 4 --> 2 --> 3 --> null
+        // -1 --> 4 --> 2 --> 3 --> null
         int[] a = Node.xify(header2.getNext());
         for (int i : a)
             System.out.print(i + "\t");
         System.out.println();
+
+        System.out.println(Node.toString(header.getNext()));
+        Node<Integer> revList = Node.reverse(header.getNext());
+        System.out.println("Reverse: " + Node.toString(revList));
+
+        Node<Integer> shufList = Node.shuffle(revList);
+        System.out.println("Shuffle: " + Node.toString(shufList));
     }
 }

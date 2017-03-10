@@ -1,6 +1,8 @@
 /**
  * Created by chen4393 on 3/7/17.
  */
+import java.util.Random;
+
 public class Node<T> {
     // instance variables
     private T data;
@@ -85,5 +87,57 @@ public class Node<T> {
             trailer = trailer.getNext();
         }
         return ans;
+    }
+
+    public static <T> Node<T> reverse(Node<T> list) {
+        Node prev = null;
+        Node current = list;
+        Node next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        list = prev;
+        return list;
+    }
+
+    public static <T> Node<T> shuffle(Node<T> list) {
+        int n = 0;  // size
+        Node<T> trailer = list;
+        while (trailer != null) {
+            n++;
+            trailer = trailer.getNext();
+        }
+        Random random = new Random();
+        //random.nextInt();
+        for (int i = 0; i < n; i++) {
+            int change = i + random.nextInt(n - i);
+            swap(list, i, change);
+        }
+        return list;
+    }
+
+    public static <T> void swap(Node<T> list, int i, int change) {
+        Object helper = getFromIndex(list, i);
+        setFromIndex(list, i, getFromIndex(list, change));
+        setFromIndex(list, change, helper);
+    }
+
+    public static <T> Object getFromIndex(Node<T> list, int i) {
+        while (i > 0) {
+            list = list.getNext();
+            i--;
+        }
+        return list.getData();
+    }
+
+    public static <T> void setFromIndex(Node<T> list, int i, Object obj) {
+        while (i > 0) {
+            list = list.getNext();
+            i--;
+        }
+        list.setData((T)obj);
     }
 }
